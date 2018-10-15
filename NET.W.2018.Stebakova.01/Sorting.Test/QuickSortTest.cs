@@ -13,7 +13,7 @@ namespace Sorting.Test
         {
             int[] arr = { 6, 7, 8, 9, 1, 6, 4, 3, 2, 5, 9 };
             int[] expectedArray = { 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 9 };
-            QuickSorting.QuickSort(arr);
+            Sorting.QuickSort(arr);
             CollectionAssert.AreEqual(expectedArray, arr);
         }
 
@@ -33,21 +33,21 @@ namespace Sorting.Test
             Array.Copy(arr, expectedArray, length);
             Array.Sort(expectedArray);
 
-            QuickSorting.QuickSort(arr);
+            Sorting.QuickSort(arr);
             CollectionAssert.AreEqual(expectedArray, arr);
         }
 
         [TestMethod]
         public void QuickSort_WithNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => QuickSorting.QuickSort(null));
+            Assert.ThrowsException<ArgumentNullException>(() => Sorting.QuickSort(null));
         }
 
 
         [TestMethod]
         public void QuickSort_ArrayWithNullLength()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => QuickSorting.QuickSort(new int[] { }));
+            Assert.ThrowsException<ArgumentNullException>(() => Sorting.QuickSort(new int[] { }));
         }
     }
 }

@@ -10,14 +10,14 @@ namespace Sorting.Test.NUnitTest
         [TestCase(new int[] { 89, 7, 54 }, ExpectedResult = new int[] { 7, 54, 89 })]
         public int[] QuickSort_SmallArray(int[] array)
         {
-            QuickSorting.QuickSort(array);
+            Sorting.QuickSort(array);
             return array;
         }
 
         [Test]
         public void QuickSort_ArrayWithNullLength()
         {
-            Assert.Throws<ArgumentNullException>(() => QuickSorting.QuickSort(new int[] { }));
+            Assert.Throws<ArgumentNullException>(() => Sorting.QuickSort(new int[] { }));
         }
     }
 }

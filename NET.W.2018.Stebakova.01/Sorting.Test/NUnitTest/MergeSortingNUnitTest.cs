@@ -10,14 +10,14 @@ namespace Sorting.Test.NUnitTest
         [TestCase(new int[] { 89, 7, 54 }, ExpectedResult = new int[] { 7, 54, 89 })]
         public int[] MergeSort_SmallArray(int[] array)
         {
-            MergeSorting.MergeSort(array);
+            Sorting.MergeSort(array);
             return array;
         }
 
         [Test]
         public void MergeSort_WithNullArray()
         {
-            Assert.Throws<ArgumentNullException>(() => MergeSorting.MergeSort(null));
+            Assert.Throws<ArgumentNullException>(() => Sorting.MergeSort(null));
         }
     }
 }
