@@ -1,0 +1,14 @@
+[ODBC]
+DRIVER=Microsoft Excel Driver (*.xls)
+UID=admin
+UserCommitSync=Yes
+Threads=3
+SafeTransactions=0
+ReadOnly=1
+PageTimeout=5
+MaxScanRows=8
+MaxBufferSize=2048
+FIL=excel 8.0
+DriverId=790
+DefaultDir=D:\—“¿∆»–Œ¬ ¿\EPAM\TASKS\.NET-TRAINING-EPAM\NET.W.2018.STEBAKOVA.03\ARITHMETICOPERATIONS.MSUNITTESTS
+DBQ=D:\—“¿∆»–Œ¬ ¿\EPAM\TASKS\.NET-TRAINING-EPAM\NET.W.2018.STEBAKOVA.03\ARITHMETICOPERATIONS.MSUNITTESTS\UnitTestDS.xls
