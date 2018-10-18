@@ -53,13 +53,13 @@ namespace ArithmeticOperations
         /// <returns>Nth root in form of real number.</returns>
         private static double FindRoot(double number, int power, double accuracy)
         {
-            double current = number / 2;
+            double current = number;
             double previous = 0;
-            while (Math.Abs(previous - current) >= accuracy)
+            do
             {
                 previous = current;
                 current = 1.0 / power * ((power - 1) * current + number / Math.Pow(current, power - 1));
-            }
+            } while (Math.Abs(previous - current) >= accuracy);
 
             return current;
         }
