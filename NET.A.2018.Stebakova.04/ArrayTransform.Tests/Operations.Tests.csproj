@@ -53,15 +53,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayTransformationTests.cs" />
+    <Compile Include="DoubleExtentionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ArrayTransform\ArrayTransform.csproj">
+    <ProjectReference Include="..\ArrayTransform\Operations.csproj">
       <Project>{c938965b-9109-4602-a8e8-91ade74f0857}</Project>
-      <Name>ArrayTransform</Name>
+      <Name>Operations</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

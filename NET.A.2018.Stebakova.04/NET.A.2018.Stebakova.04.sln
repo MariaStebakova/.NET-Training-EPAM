@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrayTransform", "ArrayTransform\ArrayTransform.csproj", "{C938965B-9109-4602-A8E8-91ADE74F0857}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Operations", "ArrayTransform\Operations.csproj", "{C938965B-9109-4602-A8E8-91ADE74F0857}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArrayTransform.Tests", "ArrayTransform.Tests\ArrayTransform.Tests.csproj", "{AC2F32B0-20D6-402F-B415-1EF597810277}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Operations.Tests", "ArrayTransform.Tests\Operations.Tests.csproj", "{AC2F32B0-20D6-402F-B415-1EF597810277}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
