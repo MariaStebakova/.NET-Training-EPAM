@@ -41,19 +41,21 @@
 
             string[] resWordArray = new string[doubles.Length];
             StringBuilder words = new StringBuilder();
+            StringBuilder stringNum = new StringBuilder();
             int count = 0;
 
             for (int i = 0; i < doubles.Length; i++)
             {
-                string stringNum = Convert.ToString(doubles[i]);
-                foreach (var s in stringNum)
+                stringNum.Append(Convert.ToString(doubles[i]));
+
+                for (int k = 0; k<stringNum.Length; k++)
                 {
-                    if (s == '-')
+                    if (stringNum[k] == '-')
                     {
                         words.Append("minus ");
                     }
 
-                    if (s == ',')
+                    if (stringNum[k] == ',')
                     {
                         words.Append("point ");
                     }
@@ -61,7 +63,7 @@
                     for (int j = 0; j < digits.Length; j++)
                     {
                         string ch = j.ToString();
-                        if (s == ch[0])
+                        if (stringNum[k] == ch[0])
                         {
                             words.Append(digits[j] + " ");
                             break;
@@ -73,6 +75,7 @@
                 resWordArray[count] = words.ToString();
                 count++;
                 words.Clear();
+                stringNum.Clear();
             }
 
             return resWordArray;
