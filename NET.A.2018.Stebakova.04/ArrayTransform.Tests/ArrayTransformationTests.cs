@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace ArrayTransform.Tests
+namespace Operations.Tests
 {
     [TestFixture]
     public class ArrayTransformationTests

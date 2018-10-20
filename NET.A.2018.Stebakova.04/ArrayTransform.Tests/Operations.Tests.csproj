@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="ArrayTransformationTests.cs" />
     <Compile Include="DoubleExtentionTests.cs" />
+    <Compile Include="GCDFinderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

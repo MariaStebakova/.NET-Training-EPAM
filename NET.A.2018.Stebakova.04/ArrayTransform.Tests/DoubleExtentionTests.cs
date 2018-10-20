@@ -1,7 +1,8 @@
 ﻿using NUnit.Framework;
+using Operations;
 
 
-namespace ArrayTransform.Tests
+namespace Operations.Tests
 {
 
     [TestFixture]

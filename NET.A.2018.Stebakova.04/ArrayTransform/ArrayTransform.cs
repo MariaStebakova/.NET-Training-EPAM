@@ -1,4 +1,4 @@
-﻿namespace ArrayTransform
+﻿namespace Operations
 {
     using System;
     using System.Text;
