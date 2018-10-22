@@ -1,4 +1,6 @@
-﻿namespace Operations
+﻿using System.Runtime.Remoting.Messaging;
+
+namespace Operations
 {
     using System;
     using System.Diagnostics;
@@ -9,10 +11,81 @@
     public static class GCDFinder
     {
         /// <summary>
+        /// Public method for finding GCD of two numbers by classic Euclid algorithm
+        /// </summary>
+        /// <param name="firstNumber">First number for finding GCD</param>
+        /// <param name="secondNumber">Second number for finding GCD</param>
+        /// <param name="time">Out parameter of the method execution time</param>
+        /// <returns>GCD of input numbers</returns>
+        /// <exception cref="ArgumentException">Thrown when the input array is empty.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the input array is equal to null.</exception>
+        public static int EuclidGcdAlgorithm(int firstNumber, int secondNumber, out long time)
+        {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            int gcd = EuclidGcd(firstNumber, secondNumber);
+
+            stopWatch.Stop();
+            time = stopWatch.ElapsedTicks;
+
+            return gcd;
+        }
+
+        /// <summary>
+        /// Public method for finding GCD of three numbers by classic Euclid algorithm
+        /// </summary>
+        /// <param name="firstNumber">First number for finding GCD</param>
+        /// <param name="secondNumber">Second number for finding GCD</param>
+        /// <param name="thirdNumber">Third number for finding GCD</param>
+        /// <param name="time">Out parameter of the method execution time</param>
+        /// <returns>GCD of input numbers</returns>
+        /// <exception cref="ArgumentException">Thrown when the input array is empty.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the input array is equal to null.</exception>
+        public static int EuclidGcdAlgorithm(int firstNumber, int secondNumber, int thirdNumber, out long time)
+        {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            int gcd = EuclidGcd(EuclidGcd(firstNumber, secondNumber), thirdNumber);
+
+            stopWatch.Stop();
+            time = stopWatch.ElapsedTicks;
+
+            return gcd;
+        }
+
+        /// <summary>
+        /// Public method for finding GCD of four numbers by classic Euclid algorithm
+        /// </summary>
+        /// <param name="firstNumber">First number for finding GCD</param>
+        /// <param name="secondNumber">Second number for finding GCD</param>
+        /// <param name="thirdNumber">Third number for finding GCD</param>
+        /// <param name="forthNumber">Forth number for finding GCD</param>
+        /// <param name="time">Out parameter of the method execution time</param>
+        /// <returns>GCD of input numbers</returns>
+        /// <exception cref="ArgumentException">Thrown when the input array is empty.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the input array is equal to null.</exception>
+        public static int EuclidGcdAlgorithm(int firstNumber, int secondNumber, int thirdNumber, int forthNumber, out long time)
+        {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            int gcd = EuclidGcd(EuclidGcd(firstNumber, secondNumber), EuclidGcd(thirdNumber, forthNumber));
+
+            stopWatch.Stop();
+            time = stopWatch.ElapsedTicks;
+
+            return gcd;
+        }
+
+        /// <summary>
         /// Public method for finding GCD of two and more numbers by classic Euclid algorithm
         /// </summary>
         /// <param name="values">Array of numbers for finding GCD</param>
         /// <returns>GCD of input numbers</returns>
+        /// <exception cref="ArgumentException">Thrown when the input array is empty.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the input array is equal to null.</exception>
         public static int EuclidGcdAlgorithm(params int[] values)
         {
             CheckInputData(values);
@@ -32,6 +105,8 @@
         /// <param name="time">Out parameter of the method execution time</param>
         /// <param name="values">Array of numbers for finding GCD</param>
         /// <returns>GCD of input numbers</returns>
+        /// <exception cref="ArgumentException">Thrown when the input array is empty.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the input array is equal to null.</exception>
         public static int EuclidGcdAlgorithm(out long time, params int[] values)
         {
             CheckInputData(values);
@@ -48,10 +123,81 @@
         }
 
         /// <summary>
+        /// Public method for finding GCD of two numbers by Binary (Stein) algorithm
+        /// </summary>
+        /// <param name="firstNumber">First number for finding GCD</param>
+        /// <param name="secondNumber">Second number for finding GCD</param>
+        /// <param name="time">Out parameter of the method execution time</param>
+        /// <returns>GCD of input numbers</returns>
+        /// <exception cref="ArgumentException">Thrown when the input array is empty.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the input array is equal to null.</exception>
+        public static int BinaryGcdAlgorithm(int firstNumber, int secondNumber, out long time)
+        {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            int gcd = BinaryGcd(firstNumber, secondNumber);
+
+            stopWatch.Stop();
+            time = stopWatch.ElapsedTicks;
+
+            return gcd;
+        }
+
+        /// <summary>
+        /// Public method for finding GCD of three numbers by Binary (Stein) algorithm
+        /// </summary>
+        /// <param name="firstNumber">First number for finding GCD</param>
+        /// <param name="secondNumber">Second number for finding GCD</param>
+        /// <param name="thirdNumber">Third number for finding GCD</param>
+        /// <param name="time">Out parameter of the method execution time</param>
+        /// <returns>GCD of input numbers</returns>
+        /// <exception cref="ArgumentException">Thrown when the input array is empty.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the input array is equal to null.</exception>
+        public static int BinaryGcdAlgorithm(int firstNumber, int secondNumber, int thirdNumber, out long time)
+        {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            int gcd = BinaryGcd(BinaryGcd(firstNumber, secondNumber), thirdNumber);
+
+            stopWatch.Stop();
+            time = stopWatch.ElapsedTicks;
+
+            return gcd;
+        }
+
+        /// <summary>
+        /// Public method for finding GCD of four numbers by Binary (Stein) algorithm
+        /// </summary>
+        /// <param name="firstNumber">First number for finding GCD</param>
+        /// <param name="secondNumber">Second number for finding GCD</param>
+        /// <param name="thirdNumber">Third number for finding GCD</param>
+        /// <param name="forthNumber">Forth number for finding GCD</param>
+        /// <param name="time">Out parameter of the method execution time</param>
+        /// <returns>GCD of input numbers</returns>
+        /// <exception cref="ArgumentException">Thrown when the input array is empty.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the input array is equal to null.</exception>
+        public static int BinaryGcdAlgorithm(int firstNumber, int secondNumber, int thirdNumber, int forthNumber, out long time)
+        {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            int gcd = BinaryGcd(BinaryGcd(firstNumber, secondNumber), BinaryGcd(thirdNumber, forthNumber));
+
+            stopWatch.Stop();
+            time = stopWatch.ElapsedTicks;
+
+            return gcd;
+        }
+
+        /// <summary>
         /// Public method for finding GCD of two and more numbers by Binary (Stein) algorithm
         /// </summary>
         /// <param name="values">Array of numbers for finding GCD</param>
         /// <returns>GCD of input numbers</returns>
+        /// <exception cref="ArgumentException">Thrown when the input array is empty.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the input array is equal to null.</exception>
         public static int BinaryGcdAlgorithm(params int[] values)
         {
             CheckInputData(values);
@@ -71,6 +217,8 @@
         /// <param name="time">Out parameter of the method execution time</param>
         /// <param name="values">Array of numbers for finding GCD</param>
         /// <returns>GCD of input numbers</returns>
+        /// <exception cref="ArgumentException">Thrown when the input array is empty.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when the input array is equal to null.</exception>
         public static int BinaryGcdAlgorithm(out long time, params int[] values)
         {
             CheckInputData(values);
