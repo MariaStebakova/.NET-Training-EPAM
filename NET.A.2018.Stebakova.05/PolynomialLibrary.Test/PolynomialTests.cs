@@ -68,6 +68,7 @@ namespace PolynomialLibrary.Test
         }
 
         [TestCase(new double[] { 1, 2, 3 }, new double[] { 2, 3, 4 }, ExpectedResult = new double[] { -1, -1, -1 })]
+        [TestCase(new double[] { 1, 2, 3 }, new double[] { 2, 3, 4, 5, 6 }, ExpectedResult = new double[] { -1, -1, -1, -5, -6 })]
         [TestCase(new double[] { -2, 5, double.MinValue }, new double[] { -2.5, 7, -(double.MaxValue) }, ExpectedResult = new double[] { 0.5, -2, 0 })]
         public static double[] SubstractTest(double[] firstCoefs, double[] secondCoefs)
         {

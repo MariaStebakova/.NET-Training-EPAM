@@ -230,6 +230,7 @@ namespace PolynomialLibrary
             var biggerPolynomial = (firstPol.Length > secondPol.Length) ? firstPol : secondPol;
             var lessPolynomial = (firstPol.Length < secondPol.Length) ? firstPol : secondPol;
             double[] result = new double[biggerPolynomial.Length];
+            biggerPolynomial.CoefficientsArray.CopyTo(result, 0);
 
             for (int i = 0; i < lessPolynomial.Length; i++)
             {
@@ -240,7 +241,7 @@ namespace PolynomialLibrary
             {
                 for (int i = firstPol.Length; i < secondPol.Length; i++)
                 {
-                    secondPol.CoefficientsArray[i] = -secondPol.CoefficientsArray[i];
+                    result[i] = -result[i];
                 }
             }
             return new Polynomial(result);
