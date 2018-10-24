@@ -6,8 +6,18 @@ using System.Threading.Tasks;
 
 namespace JaggedArrayLibrary
 {
+    /// <summary>
+    /// Public class for sorting jagged arrays
+    /// </summary>
     public static class JaggedArraySort
     {
+        /// <summary>
+        /// Static method for sorting jagged arrays in different ways
+        /// </summary>
+        /// <param name="jaggedArray">Jagged array for sorting</param>
+        /// <param name="comparer">Type of comparer</param>
+        /// <exception cref="ArgumentNullException">Thrown if <param name="jaggedArray"/> of <param name="comparer"/> is equal to null</exception>
+        /// <exception cref="ArgumentException">Thrown if <param name="jaggedArray"/> is empty</exception>
         public static void Sort(int[][] jaggedArray, IComparer<int[]> comparer)
         {
             CheckInputArguments(jaggedArray, comparer);
