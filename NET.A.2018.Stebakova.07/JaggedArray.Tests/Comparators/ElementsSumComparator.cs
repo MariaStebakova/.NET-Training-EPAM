@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JaggedArrayLibrary.Comparators
+namespace JaggedArray.Tests.Comparators
 {
-    public class MinElementComparator
+    public class ElementsSumComparator
     {
         /// <summary>
-        /// Class that describes comparer for increasing minimum elements of two arrays
+        /// Class that describes comparer for increasing elements sum of two arrays
         /// </summary>
-        public class MinElementIncreaseComparer : IComparer<int[]>
+        public class ElementsSumIncreaseComparer : IComparer<int[]>
         {
             /// <summary>
-            /// Method for comparing the minimum elements of two arrays by increasing
+            /// Method for comparing the sum of two arrays by increasing
             /// </summary>
             /// <param name="firstArray">First array to compare</param>
             /// <param name="secondArray">SecondArray to compare</param>
@@ -31,22 +31,32 @@ namespace JaggedArrayLibrary.Comparators
                     return -1;
                 }
 
-                if (firstArray.Min() < secondArray.Min())
+                if (FindSum(firstArray) <= FindSum(secondArray))
                 {
                     return -1;
                 }
 
                 return 1;
             }
+
+            private int FindSum(int[] array)
+            {
+                int result = 0;
+
+                foreach (int a in array)
+                    result += a;
+
+                return result;
+            }
         }
 
         /// <summary>
-        /// Class that describes comparer for decreasing minimum elements of two arrays
+        /// Class that describes comparer for decreasing elements sum of two arrays
         /// </summary>
-        public class MinElementDecreaseComparer : IComparer<int[]>
+        public class ElementsSumDecreaseComparer : IComparer<int[]>
         {
             /// <summary>
-            /// Method for comparing the minimum elements of two arrays by decreasing
+            /// Method for comparing the sum of two arrays by decreasing
             /// </summary>
             /// <param name="firstArray">First array to compare</param>
             /// <param name="secondArray">SecondArray to compare</param>
@@ -63,12 +73,22 @@ namespace JaggedArrayLibrary.Comparators
                     return 1;
                 }
 
-                if (firstArray.Min() > secondArray.Min())
+                if (FindSum(firstArray) >= FindSum(secondArray))
                 {
                     return -1;
                 }
 
                 return 1;
+            }
+
+            private int FindSum(int[] array)
+            {
+                int result = 0;
+
+                foreach (int a in array)
+                    result += a;
+
+                return result;
             }
         }
     }

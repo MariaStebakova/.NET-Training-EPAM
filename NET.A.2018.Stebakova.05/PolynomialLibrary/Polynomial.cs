@@ -6,7 +6,7 @@ namespace PolynomialLibrary
     /// <summary>
     /// Public sealed class for working with polynomials
     /// </summary>
-    public sealed class Polynomial
+    public sealed class Polynomial: ICloneable, IEquatable<Polynomial>
     {
         private double[] polinomialCoefficients;
 
@@ -54,6 +54,62 @@ namespace PolynomialLibrary
         public double[] CoefficientsArray
         {
             get => polinomialCoefficients;    
+        }
+
+        /// <summary>
+        /// Implemened method of the ICloneable
+        /// </summary>
+        /// <returns>Clone object</returns>
+        object ICloneable.Clone()
+        {
+            return Clone();
+        }
+
+        /// <summary>
+        /// Public method for cloning current polynomial
+        /// </summary>
+        /// <returns>The clone polynomial of the current</returns>
+        public Polynomial Clone()
+        {
+            return new Polynomial(polinomialCoefficients);
+        }
+
+        /// <summary>
+        /// Implementation of the IEquatable.Equals
+        /// </summary>
+        /// <param name="otherPolynomial">The polynomial object for checking for equality</param>
+        /// <returns>True if polymomials are equal, false if not</returns>
+        public bool Equals(Polynomial otherPolynomial)
+        {
+            if (ReferenceEquals(this, otherPolynomial))
+            {
+                return true;
+            }
+
+            if (this is null || otherPolynomial is null)
+            {
+                return false;
+            }
+
+            if (Power != otherPolynomial.Power)
+            {
+                return false;
+            }
+
+            if (Power != otherPolynomial.Power)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < otherPolynomial.Length; i++)
+            {
+                if (Math.Abs(otherPolynomial.CoefficientsArray[i] - polinomialCoefficients[i]) > delta)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -124,7 +180,7 @@ namespace PolynomialLibrary
                 return false;
             }
 
-            var otherPolynomial = (Polynomial) obj;
+            /*var otherPolynomial = (Polynomial) obj;
             if (Power != otherPolynomial.Power)
             {
                 return false;
@@ -136,9 +192,9 @@ namespace PolynomialLibrary
                 {
                     return false;
                 }
-            }
+            }*/
 
-            return true;
+            return Equals((Polynomial)obj);
         }
 
         /// <summary>

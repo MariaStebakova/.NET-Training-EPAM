@@ -1,6 +1,6 @@
 ﻿using System;
 using JaggedArrayLibrary;
-using JaggedArrayLibrary.Comparators;
+using JaggedArray.Tests.Comparators;
 using NUnit.Framework;
 
 namespace JaggedArray.Tests

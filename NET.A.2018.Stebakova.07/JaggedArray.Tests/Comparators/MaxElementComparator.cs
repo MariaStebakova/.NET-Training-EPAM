@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JaggedArrayLibrary.Comparators
+namespace JaggedArray.Tests.Comparators
 {
-    public class ElementsSumComparator
+    public class MaxElementComparator
     {
         /// <summary>
-        /// Class that describes comparer for increasing elements sum of two arrays
+        /// Class that describes comparer for increasing maximum elements of two arrays
         /// </summary>
-        public class ElementsSumIncreaseComparer : IComparer<int[]>
+        public class MaxElementIncreaseComparer : IComparer<int[]>
         {
             /// <summary>
-            /// Method for comparing the sum of two arrays by increasing
+            /// Method for comparing the maximum elements of two arrays by increasing
             /// </summary>
             /// <param name="firstArray">First array to compare</param>
             /// <param name="secondArray">SecondArray to compare</param>
@@ -31,22 +31,36 @@ namespace JaggedArrayLibrary.Comparators
                     return -1;
                 }
 
-                if (firstArray.Sum() <= secondArray.Sum())
+                if (FindMax(firstArray) < FindMax(secondArray))
                 {
                     return -1;
                 }
 
                 return 1;
             }
+
+            private int FindMax(int[] array)
+            {
+                int maxValue = int.MinValue;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    if (array[i] > maxValue && array[i] != int.MinValue)
+                    {
+                        maxValue = array[i];
+                    }
+                }
+
+                return maxValue;
+            }
         }
 
         /// <summary>
-        /// Class that describes comparer for decreasing elements sum of two arrays
+        /// Class that describes comparer for decreasing maximum elements of two arrays
         /// </summary>
-        public class ElementsSumDecreaseComparer : IComparer<int[]>
+        public class MaxElementDecreaseComparer : IComparer<int[]>
         {
             /// <summary>
-            /// Method for comparing the sum of two arrays by decreasing
+            /// Method for comparing the maximum elements of two arrays by decreasing
             /// </summary>
             /// <param name="firstArray">First array to compare</param>
             /// <param name="secondArray">SecondArray to compare</param>
@@ -63,12 +77,26 @@ namespace JaggedArrayLibrary.Comparators
                     return 1;
                 }
 
-                if (firstArray.Sum() >= secondArray.Sum())
+                if (FindMax(firstArray) > FindMax(secondArray))
                 {
                     return -1;
                 }
 
                 return 1;
+            }
+
+            private int FindMax(int[] array)
+            {
+                int maxValue = int.MinValue;
+                for (int i = 0; i < array.Length; i++)
+                {
+                    if (array[i] > maxValue && array[i] != int.MinValue)
+                    {
+                        maxValue = array[i];
+                    }
+                }
+
+                return maxValue;
             }
         }
     }
