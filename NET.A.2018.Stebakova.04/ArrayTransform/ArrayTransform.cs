@@ -9,6 +9,42 @@
     public static class ArrayTransform
     {
         /// <summary>
+        /// Transforms number to its string representation.
+        /// </summary>
+        /// <param name="number">Double number.</param>
+        /// <returns>Number in string representation.</returns>
+        public delegate string Transformer(double number);
+
+        /// <summary>
+        /// Public method for transforming the double array somehow.
+        /// </summary>
+        /// <param name="array">Array of double numbers.</param>
+        /// <param name="transformer">Method performing transforming.</param>
+        /// <returns>Array of strings.</returns>
+        /// <exception cref="ArgumentNullException">Is thrown if the <param name="array"/> is equal to null.</exception>
+        /// <exception cref="ArgumentException">Is thrown if the <param name="array"/> is empty.</exception>
+        public static string[] Transform(double[] array, Transformer transformer)
+        {
+            if (array == null)
+            {
+                throw new ArgumentNullException($"{nameof(array)} can't be equal to null");
+            }
+
+            if (array.Length == 0)
+            {
+                throw new ArgumentException($"{nameof(array)} can't be empty");
+            }
+
+            string[] resWordArray = new string[array.Length];
+            for (int i = 0; i < array.Length; i++)
+            {
+                resWordArray[i] += transformer(array[i]);
+            }
+
+            return resWordArray;
+        }
+
+        /// <summary>
         /// Public method for transforming the double array into its verbal representation.
         /// </summary>
         /// <param name="array">Array of double numbers.</param>
@@ -64,7 +100,7 @@
             return resBinArray;
         }
 
-        private static string WordTransfrom(double doubles)
+        public static string WordTransfrom(double doubles)
         {
             string[] digits = { "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
 

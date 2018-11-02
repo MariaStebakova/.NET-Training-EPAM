@@ -27,5 +27,13 @@ namespace Operations.Tests
             Assert.Throws<ArgumentException>(() => ArrayTransform.TransformToWords(new double[] {}));
         }
 
+        [TestCase(new double[] { -23.809, 0.295, 15.17 },
+            ExpectedResult = new string[]
+                {"minus two three point eight zero nine", "zero point two nine five", "one five point one seven"})]
+        [TestCase(new double[] { 0.321, 65.7 },
+            ExpectedResult = new string[]
+                {"zero point three two one", "six five point seven"})]
+        public string[] TransformToWordsTest_WithCorrectArrays_WithDelegate(double[] doubles)
+            => ArrayTransform.Transform(doubles, ArrayTransform.WordTransfrom);
     }
 }
