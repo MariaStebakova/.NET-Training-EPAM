@@ -24,7 +24,7 @@ namespace Operations
             var stopWatch = new Stopwatch();
             stopWatch.Start();
 
-            int gcd = EuclidGcd(firstNumber, secondNumber);
+            int gcd = FindGCD(EuclidGcd, firstNumber, secondNumber);
 
             stopWatch.Stop();
             time = stopWatch.ElapsedTicks;
@@ -47,7 +47,7 @@ namespace Operations
             var stopWatch = new Stopwatch();
             stopWatch.Start();
 
-            int gcd = EuclidGcd(EuclidGcd(firstNumber, secondNumber), thirdNumber);
+            int gcd = FindGCD(EuclidGcd, firstNumber, secondNumber, thirdNumber);
 
             stopWatch.Stop();
             time = stopWatch.ElapsedTicks;
@@ -71,7 +71,7 @@ namespace Operations
             var stopWatch = new Stopwatch();
             stopWatch.Start();
 
-            int gcd = EuclidGcd(EuclidGcd(firstNumber, secondNumber), EuclidGcd(thirdNumber, forthNumber));
+            int gcd = FindGCD(EuclidGcd, firstNumber, secondNumber, thirdNumber, forthNumber);
 
             stopWatch.Stop();
             time = stopWatch.ElapsedTicks;
@@ -90,11 +90,7 @@ namespace Operations
         {
             CheckInputData(values);
 
-            int gcd = values[0];
-            for (int i = 1; i < values.Length; i++)
-            {
-                gcd = EuclidGcd(gcd, values[i]);
-            }
+            int gcd = FindGCD(EuclidGcd, values);
 
             return gcd;
         }
@@ -136,7 +132,7 @@ namespace Operations
             var stopWatch = new Stopwatch();
             stopWatch.Start();
 
-            int gcd = BinaryGcd(firstNumber, secondNumber);
+            int gcd = FindGCD(BinaryGcd, firstNumber, secondNumber);
 
             stopWatch.Stop();
             time = stopWatch.ElapsedTicks;
@@ -159,7 +155,7 @@ namespace Operations
             var stopWatch = new Stopwatch();
             stopWatch.Start();
 
-            int gcd = BinaryGcd(BinaryGcd(firstNumber, secondNumber), thirdNumber);
+            int gcd = FindGCD(BinaryGcd, firstNumber, secondNumber, thirdNumber);
 
             stopWatch.Stop();
             time = stopWatch.ElapsedTicks;
@@ -183,7 +179,7 @@ namespace Operations
             var stopWatch = new Stopwatch();
             stopWatch.Start();
 
-            int gcd = BinaryGcd(BinaryGcd(firstNumber, secondNumber), BinaryGcd(thirdNumber, forthNumber));
+            int gcd = FindGCD(BinaryGcd, firstNumber, secondNumber, thirdNumber, forthNumber);
 
             stopWatch.Stop();
             time = stopWatch.ElapsedTicks;
@@ -202,11 +198,7 @@ namespace Operations
         {
             CheckInputData(values);
 
-            int gcd = values[0];
-            for (int i = 1; i < values.Length; i++)
-            {
-                gcd = BinaryGcd(gcd, values[i]);
-            }
+            int gcd = FindGCD(BinaryGcd, values);
 
             return gcd;
         }
@@ -232,6 +224,50 @@ namespace Operations
             time = stopWatch.ElapsedTicks;
 
             return gcd;
+        }
+
+        /// <summary>
+        /// Finds the GCD using delegates
+        /// </summary>
+        /// <param name="GcdAlgorithm">The GCD algorithm.</param>
+        /// <param name="firstNum">The first number.</param>
+        /// <param name="secondNum">The second number.</param>
+        /// <returns>GCD</returns>
+        private static int FindGCD(Func<int, int, int> GcdAlgorithm, int firstNum, int secondNum)
+            => GcdAlgorithm(firstNum, secondNum);
+
+        /// <summary>
+        /// Finds the GCD using delegate.
+        /// </summary>
+        /// <param name="GcdAlgorithm">The GCD algorithm.</param>
+        /// <param name="firstNum">The first number.</param>
+        /// <param name="secondNum">The second number.</param>
+        /// <param name="thirdNum">The third number.</param>
+        /// <returns>GCD</returns>
+        private static int FindGCD(Func<int, int, int> GcdAlgorithm,
+            int firstNum, int secondNum, int thirdNum)
+            => GcdAlgorithm(GcdAlgorithm(firstNum, secondNum), thirdNum);
+
+        /// <summary>
+        /// Finds the GCD using delegate
+        /// </summary>
+        /// <param name="GcdAlgorithm">The GCD algorithm.</param>
+        /// <param name="numbers">The numbers.</param>
+        /// <returns>GCD</returns>
+        private static int FindGCD(Func<int, int, int> GcdAlgorithm, params int[] nums)
+        {
+            if (nums.Length < 2)
+            {
+                throw new ArgumentException("Minimum number of elements to find GCD must be 2 or more");
+            }
+
+            int currGCD = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                currGCD = GcdAlgorithm(currGCD, nums[i]);
+            }
+
+            return currGCD;
         }
 
         private static int EuclidGcd(int firstValue, int secondValue)
