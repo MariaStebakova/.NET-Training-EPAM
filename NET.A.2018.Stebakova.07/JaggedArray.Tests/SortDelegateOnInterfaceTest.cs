@@ -1,15 +1,19 @@
 ﻿using System;
-using JaggedArrayLibrary;
+using System.Text;
+using System.Collections.Generic;
 using JaggedArray.Tests.Comparators;
+using JaggedArrayLibrary;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
+using CollectionAssert = Microsoft.VisualStudio.TestTools.UnitTesting.CollectionAssert;
 
 namespace JaggedArray.Tests
 {
     [TestFixture]
-    public class JaggedArraySortTest
+    public class SortDelegateOnInterfaceTest
     {
         [Test]
-        public void JaggedArraySort_ElementsSumComparerIncreasing()
+        public void SortDelegateOnInterface_ElementsSumComparerIncreasing()
         {
             int[][] array =
             {
@@ -27,37 +31,13 @@ namespace JaggedArray.Tests
                 new int[] { 9, 5, 4, 3, 2 }
             };
 
-            JaggedArraySort.Sort(array, new ElementsSumComparator.ElementsSumIncreaseComparer());
+            SortDelegateOnInterface.Sort(array, new ElementsSumComparator.ElementsSumIncreaseComparer());
 
             CollectionAssert.AreEqual(expected, array);
         }
 
         [Test]
-        public void JaggedArraySort_ElementsSumComparerIncreasing_WithNull()
-        {
-            int[][] array =
-            {
-                new int[] { 9, 5, 4, 3, 2 },
-                new int[] { 1, 6, 5 },
-                new int[] { 4, 3, 0, 2 },
-                null
-            };
-
-            int[][] expected =
-            {
-                new int[] { 4, 3, 0, 2 },
-                new int[] { 1, 6, 5 },
-                new int[] { 9, 5, 4, 3, 2 },
-                null
-            };
-
-            JaggedArraySort.Sort(array, new ElementsSumComparator.ElementsSumIncreaseComparer());
-
-            CollectionAssert.AreEqual(expected, array);
-        }
-
-        [Test]
-        public void JaggedArraySort_ElementsSumComparerDecreasing()
+        public void SortDelegateOnInterface_ElementsSumComparerDecreasing()
         {
             int[][] array =
             {
@@ -75,13 +55,13 @@ namespace JaggedArray.Tests
                 new int[] { 1, 1 }
             };
 
-            JaggedArraySort.Sort(array, new ElementsSumComparator.ElementsSumDecreaseComparer());
+            SortDelegateOnInterface.Sort(array, new ElementsSumComparator.ElementsSumDecreaseComparer());
 
             CollectionAssert.AreEqual(expected, array);
         }
 
         [Test]
-        public void JaggedArraySort_MaxElementComparerIncreasing()
+        public void SortDelegateOnInterface_MaxElementComparerIncreasing()
         {
             int[][] array =
             {
@@ -99,13 +79,13 @@ namespace JaggedArray.Tests
                 new int[] { 9, 5, 4, 3, 2 }
             };
 
-            JaggedArraySort.Sort(array, new MaxElementComparator.MaxElementIncreaseComparer());
+            SortDelegateOnInterface.Sort(array, new MaxElementComparator.MaxElementIncreaseComparer());
 
             CollectionAssert.AreEqual(expected, array);
         }
 
         [Test]
-        public void JaggedArraySort_MaxElementComparerDecreasing()
+        public void SortDelegateOnInterface_MaxElementComparerDecreasing()
         {
             int[][] array =
             {
@@ -123,13 +103,13 @@ namespace JaggedArray.Tests
                 new int[] { 1, 1 }
             };
 
-            JaggedArraySort.Sort(array, new MaxElementComparator.MaxElementDecreaseComparer());
+            SortDelegateOnInterface.Sort(array, new MaxElementComparator.MaxElementDecreaseComparer());
 
             CollectionAssert.AreEqual(expected, array);
         }
 
         [Test]
-        public void JaggedArraySort_MinElementComparerIncreasing()
+        public void SortDelegateOnInterface_MinElementComparerIncreasing()
         {
             int[][] array =
             {
@@ -147,13 +127,13 @@ namespace JaggedArray.Tests
                 new int[] { 9, 5, 4, 3, 2 }
             };
 
-            JaggedArraySort.Sort(array, new MinElementComparator.MinElementIncreaseComparer());
+            SortDelegateOnInterface.Sort(array, new MinElementComparator.MinElementIncreaseComparer());
 
             CollectionAssert.AreEqual(expected, array);
         }
 
         [Test]
-        public void JaggedArraySort_MinElementComparerDecreasing()
+        public void SortDelegateOnInterface_MinElementComparerDecreasing()
         {
             int[][] array =
             {
@@ -168,10 +148,10 @@ namespace JaggedArray.Tests
                 new int[] { 9, 5, 4, 3, 2 },
                 new int[] { 1, 1 },
                 new int[] { 1, 6, 5 },
-                new int[] { 4, 3, 0, 2 } 
+                new int[] { 4, 3, 0, 2 }
             };
 
-            JaggedArraySort.Sort(array, new MinElementComparator.MinElementDecreaseComparer());
+            SortDelegateOnInterface.Sort(array, new MinElementComparator.MinElementDecreaseComparer());
 
             CollectionAssert.AreEqual(expected, array);
         }

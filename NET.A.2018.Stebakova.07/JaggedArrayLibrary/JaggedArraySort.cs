@@ -12,11 +12,11 @@ namespace JaggedArrayLibrary
     public static class JaggedArraySort
     {
         /// <summary>
-        /// Static method for sorting jagged arrays in different ways
+        /// Static method for sorting jagged arrays in different ways using interface
         /// </summary>
         /// <param name="jaggedArray">Jagged array for sorting</param>
         /// <param name="comparer">Type of comparer</param>
-        /// <exception cref="ArgumentNullException">Thrown if <param name="jaggedArray"/> of <param name="comparer"/> is equal to null</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <param name="jaggedArray"/> or <param name="comparer"/> is equal to null</exception>
         /// <exception cref="ArgumentException">Thrown if <param name="jaggedArray"/> is empty</exception>
         public static void Sort(int[][] jaggedArray, IComparer<int[]> comparer)
         {
@@ -27,6 +27,29 @@ namespace JaggedArrayLibrary
                 for (int j = i + 1; j < jaggedArray.Length; j++)
                 {
                     if (comparer.Compare(jaggedArray[i], jaggedArray[j]) > 0)
+                    {
+                        Swap(ref jaggedArray[i], ref jaggedArray[j]);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Static method for sorting jagged arrays in different ways using delegate
+        /// </summary>
+        /// <param name="jaggedArray">Jagged array for sorting</param>
+        /// <param name="comparison">Delegate representing method to compare</param>
+        /// <exception cref="ArgumentNullException">Thrown if <param name="jaggedArray"/> or <param name="comparison"/> is equal to null</exception>
+        /// <exception cref="ArgumentException">Thrown if <param name="jaggedArray"/> is empty</exception>
+        public static void Sort(int[][] jaggedArray, Comparison<int[]> comparison)
+        {
+            CheckInputArguments(jaggedArray, comparison);
+
+            for (int i = 0; i < jaggedArray.Length; i++)
+            {
+                for (int j = i + 1; j < jaggedArray.Length; j++)
+                {
+                    if (comparison(jaggedArray[i], jaggedArray[j]) > 0)
                     {
                         Swap(ref jaggedArray[i], ref jaggedArray[j]);
                     }
@@ -46,6 +69,24 @@ namespace JaggedArrayLibrary
             if (comparer == null)
             {
                 throw new ArgumentNullException($"{nameof(comparer)} can't be equal to null.");
+            }
+
+            if (array == null)
+            {
+                throw new ArgumentNullException($"{nameof(array)} can't be equal to null.");
+            }
+
+            if (array.Length == 0)
+            {
+                throw new ArgumentException($"{nameof(array)} can't be empty.");
+            }
+        }
+
+        private static void CheckInputArguments(int[][] array, Comparison<int[]> comparison)
+        {
+            if (comparison == null)
+            {
+                throw new ArgumentNullException($"{nameof(comparison)} can't be equal to null.");
             }
 
             if (array == null)
