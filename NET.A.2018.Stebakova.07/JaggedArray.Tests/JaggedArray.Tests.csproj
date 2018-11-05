@@ -55,10 +55,9 @@
     <Compile Include="Comparators\ElementsSumComparator.cs" />
     <Compile Include="Comparators\MaxElementComparator.cs" />
     <Compile Include="Comparators\MinElementComparator.cs" />
-    <Compile Include="JaggedArraySortTest.cs" />
+    <Compile Include="JaggedArraySortDelegateOnInterfaceTest.cs" />
+    <Compile Include="JaggedArraySortInterfaceOnDelegateTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SortDelegateOnInterfaceTest.cs" />
-    <Compile Include="SortInterfaceOnDelegateTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrayTransform.cs" />
+    <Compile Include="ArrayTransformation\ArrayTransform.cs" />
+    <Compile Include="ArrayTransformation\ITransformer.cs" />
+    <Compile Include="ArrayTransformation\Transformers.cs" />
     <Compile Include="DoubleExtension.cs" />
     <Compile Include="GCDFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

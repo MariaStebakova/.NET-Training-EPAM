@@ -6,10 +6,7 @@ using System.Threading.Tasks;
 
 namespace JaggedArrayLibrary
 {
-    /// <summary>
-    /// Public class for sorting jagged arrays
-    /// </summary>
-    public static class JaggedArraySort
+    public static class JaggedArraySortDelegateOnInterface
     {
         /// <summary>
         /// Static method for sorting jagged arrays in different ways using interface
@@ -18,7 +15,7 @@ namespace JaggedArrayLibrary
         /// <param name="comparer">Type of comparer</param>
         /// <exception cref="ArgumentNullException">Thrown if <param name="jaggedArray"/> or <param name="comparer"/> is equal to null</exception>
         /// <exception cref="ArgumentException">Thrown if <param name="jaggedArray"/> is empty</exception>
-        public static void Sort(int[][] jaggedArray, IComparer<int[]> comparer)
+        private static void Sort(int[][] jaggedArray, IComparer<int[]> comparer)
         {
             CheckInputArguments(jaggedArray, comparer);
 
@@ -45,16 +42,19 @@ namespace JaggedArrayLibrary
         {
             CheckInputArguments(jaggedArray, comparison);
 
-            for (int i = 0; i < jaggedArray.Length; i++)
+            Sort(jaggedArray, new ComparisonAdapter(comparison));
+        }
+
+        private class ComparisonAdapter: IComparer<int[]>
+        {
+            private readonly Comparison<int[]> _comparer;
+
+            public ComparisonAdapter(Comparison<int[]> comparer)
             {
-                for (int j = i + 1; j < jaggedArray.Length; j++)
-                {
-                    if (comparison(jaggedArray[i], jaggedArray[j]) > 0)
-                    {
-                        Swap(ref jaggedArray[i], ref jaggedArray[j]);
-                    }
-                }
+                _comparer = comparer;
             }
+
+            public int Compare(int[] x, int[] y) => _comparer(x, y);
         }
 
         private static void Swap(ref int[] array1, ref int[] array2)
