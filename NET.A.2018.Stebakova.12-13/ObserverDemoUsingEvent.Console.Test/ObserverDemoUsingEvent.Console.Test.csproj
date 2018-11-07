@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{84B55548-37E3-416C-8222-7AE349094801}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ObserverDemoUsingEvent</RootNamespace>
-    <AssemblyName>ObserverDemoUsingEvent</AssemblyName>
+    <ProjectGuid>{9D6C8DA1-EAC7-4FDC-B316-6B88936A6B86}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ObserverDemoUsingEvent.Console.Test</RootNamespace>
+    <AssemblyName>ObserverDemoUsingEvent.Console.Test</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,13 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Observers\AbstractReport.cs" />
-    <Compile Include="Observers\CurrentWeatherConditionsReport.cs" />
-    <Compile Include="Observers\StatisticConditionsReport.cs" />
-    <Compile Include="WeatherData.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WeatherInfoEventArgs.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ObserverDemoUsingEvent\ObserverDemoUsingEvent.csproj">
+      <Project>{84b55548-37e3-416c-8222-7ae349094801}</Project>
+      <Name>ObserverDemoUsingEvent</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
