@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ObserverDemoUsingEvent
 {
-    public class WeatherInfoEventArgs
+    public class WeatherInfoEventArgs: EventArgs
     {
         public int Temperature { get; set; }
         public int Humidity { get; set; }

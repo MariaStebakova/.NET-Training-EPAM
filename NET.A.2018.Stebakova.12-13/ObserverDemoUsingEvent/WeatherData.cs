@@ -9,7 +9,7 @@ namespace ObserverDemoUsingEvent
 {
     public class WeatherData
     {
-        public EventHandler<WeatherInfoEventArgs> SetWeatherInfo;
+        public event EventHandler<WeatherInfoEventArgs> SetWeatherInfo;
 
         private Timer timer;
 

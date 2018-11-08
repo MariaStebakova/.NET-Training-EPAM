@@ -16,7 +16,7 @@ namespace TimerLibrary
         /// <summary>
         /// Event that occurs when timer is up
         /// </summary>
-        public EventHandler<TimerEventArgs> TimerEnded;
+        public event EventHandler<TimerEventArgs> TimerEnded;
 
         /// <summary>
         /// Method for setting up the timer
@@ -35,12 +35,10 @@ namespace TimerLibrary
 
         private void Start(int time)
         {
-            Console.WriteLine($"Timer started at {DateTime.Now:T}:");
 
             for (int i = time; i > 0; i--)
             {
                 Thread.Sleep(1000);
-                Console.WriteLine(i);
             }
         }    
     }
