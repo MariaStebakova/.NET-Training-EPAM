@@ -13,7 +13,8 @@ namespace Sorting.Test
         {
             int[] arr = { 6, 7, 8, 9, 1, 6, 4, 3, 2, 5, 9 };
             int[] expectedArray = { 1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 9 };
-            Sorting.MergeSort(arr);
+            var comparison = Comparer<int>.Default;
+            Sorting.MergeSort(arr, comparison.Compare);
             CollectionAssert.AreEqual(expectedArray, arr);
         }
 
@@ -33,14 +34,15 @@ namespace Sorting.Test
             Array.Copy(arr, expectedArray, length);
             Array.Sort(expectedArray);
 
-            Sorting.MergeSort(arr);
+            var comparison = Comparer<int>.Default;
+            Sorting.MergeSort(arr, comparison.Compare);
             CollectionAssert.AreEqual(expectedArray, arr);
         }
 
         [TestMethod]
         public void MergeSort_WithNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Sorting.MergeSort(null));
+            Assert.ThrowsException<ArgumentNullException>(() => Sorting.MergeSort<int>(null));
         }
 
 

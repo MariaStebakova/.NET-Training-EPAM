@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Sorting.Test.NUnitTest
@@ -10,14 +11,15 @@ namespace Sorting.Test.NUnitTest
         [TestCase(new int[] { 89, 7, 54 }, ExpectedResult = new int[] { 7, 54, 89 })]
         public int[] MergeSort_SmallArray(int[] array)
         {
-            Sorting.MergeSort(array);
+            var comparison = Comparer<int>.Default;
+            Sorting.MergeSort(array, comparison.Compare);
             return array;
         }
 
         [Test]
         public void MergeSort_WithNullArray()
         {
-            Assert.Throws<ArgumentNullException>(() => Sorting.MergeSort(null));
+            Assert.Throws<ArgumentNullException>(() => Sorting.MergeSort<int>(null));
         }
     }
 }

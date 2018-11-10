@@ -1,4 +1,7 @@
-﻿namespace Sorting
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace Sorting
 {
     using System;
 
@@ -11,20 +14,26 @@
         /// Static method for implementing merge sort for the input array.
         /// </summary>
         /// <param name="array">The array for sorting.</param>
+        /// <param name="comparison">Delegate that performs the comparison of two value.</param>
         /// <exception cref="ArgumentNullException">Throws when the array is equal to null or empty.</exception>
-        public static void MergeSort(int[] array)
+        public static void MergeSort<T>(T[] array, Comparison<T> comparison)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException($"{nameof(array)} can't be equal to null.");
-            }
+            CheckInputArray(array);
 
-            if (array.Length == 0)
-            {
-                throw new ArgumentNullException($"{nameof(array)} can't be empty.");
-            }
+            MergeSort(array, 0, array.Length - 1, comparison);
+        }
 
-            MergeSort(array, 0, array.Length - 1);
+        /// <summary>
+        /// Static method for implementing merge sort for the input array according to default comparer delegate.
+        /// </summary>
+        /// <param name="array">The array for sorting.</param>
+        /// <exception cref="ArgumentNullException">Throws when the array is equal to null or empty.</exception>
+        public static void MergeSort<T>(T[] array)
+        {
+            CheckInputArray(array);
+
+            var comparison = Comparer<T>.Default;
+            MergeSort(array, 0, array.Length - 1, comparison.Compare);
         }
 
         /// <summary>
@@ -33,9 +42,13 @@
         /// <param name="array">The array for sorting</param>
         /// <param name="leftBorder">Index of the first element of the array.</param>
         /// <param name="rightBorder">Index of the last element of the array.</param>
+        /// <param name="comparison">Delegate that performs the comparison of two value.</param>
         /// <exception cref="ArgumentException">Throws when the start of the array more than the end.</exception>
-        public static void MergeSort(int[] array, int leftBorder, int rightBorder)
+        /// <exception cref="ArgumentNullException">Throws when the array is equal to null or empty.</exception>
+        public static void MergeSort<T>(T[] array, int leftBorder, int rightBorder, Comparison<T> comparison)
         {
+            CheckInputArray(array);
+
             if (leftBorder > rightBorder)
             {
                 throw new ArgumentException($"{nameof(leftBorder)} can't be more or equal to the {nameof(rightBorder)}");
@@ -44,9 +57,9 @@
             if (leftBorder < rightBorder)
             {
                 int middle = (leftBorder + rightBorder) / 2;
-                MergeSort(array, leftBorder, middle);
-                MergeSort(array, middle + 1, rightBorder);
-                Merge(array, leftBorder, middle, rightBorder);
+                MergeSort(array, leftBorder, middle, comparison);
+                MergeSort(array, middle + 1, rightBorder, comparison);
+                Merge(array, leftBorder, middle, rightBorder, comparison);
             }
         }
 
@@ -57,17 +70,18 @@
         /// <param name="leftBorder">Index of the first element in the first array.</param>
         /// <param name="middle">Index of the last element in the first array.</param>
         /// <param name="rightBorder">Index of the last element in the second array.</param>
-        public static void Merge(int[] array, int leftBorder, int middle, int rightBorder)
+        /// <param name="comparison">Delegate that performs the comparison of two value.</param>
+        public static void Merge<T>(T[] array, int leftBorder, int middle, int rightBorder, Comparison<T> comparison)
         {
             int firstIndex = leftBorder;
             int secondIndex = middle + 1;
             int tempArrayIndex = 0;
 
-            int[] tempArray = new int[rightBorder - leftBorder + 1];
+            T[] tempArray = new T[rightBorder - leftBorder + 1];
 
             while (firstIndex <= middle && secondIndex <= rightBorder)
             {
-                if (array[firstIndex] < array[secondIndex])
+                if (comparison(array[firstIndex], array[secondIndex]) < 0)
                 {
                     tempArray[tempArrayIndex] = array[firstIndex];
                     firstIndex++;
@@ -104,23 +118,29 @@
         }
 
         /// <summary>
-        /// Static method for implementing quick sort for the input array.
+        /// Static method for implementing quick sort for the input array according default comparer delegate.
         /// </summary>
         /// <param name="array">The array for sorting.</param>
         /// <exception cref="ArgumentNullException">Throws when the array is equal to null or empty.</exception>
-        public static void QuickSort(int[] array)
+        public static void QuickSort<T>(T[] array)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException($"{nameof(array)} can't be equal to null.");
-            }
+            CheckInputArray(array);
 
-            if (array.Length == 0)
-            {
-                throw new ArgumentNullException($"{nameof(array)} can't be empty.");
-            }
+            var comparer = Comparer<T>.Default;
+            QuickSort(array, 0, array.Length - 1, comparer.Compare);
+        }
 
-            QuickSort(array, 0, array.Length - 1);
+        /// <summary>
+        /// Static method for implementing quick sort for the input array.
+        /// </summary>
+        /// <param name="array">The array for sorting.</param>
+        /// <param name="comparison">Delegate that performs the comparison of two value.</param>
+        /// <exception cref="ArgumentNullException">Throws when the array is equal to null or empty.</exception>
+        public static void QuickSort<T>(T[] array, Comparison<T> comparison)
+        {
+            CheckInputArray(array);
+
+            QuickSort(array, 0, array.Length - 1, comparison);
         }
 
         /// <summary>
@@ -129,9 +149,12 @@
         /// <param name="array">The array for sorting</param>
         /// <param name="leftBorder">Index of the first element of the array.</param>
         /// <param name="rightBorder">Index of the last element of the array.</param>
+        /// <param name="comparison">Delegate that performs the comparison of two value.</param>
         /// <exception cref="ArgumentException">Throws when the start of the array more than the end.</exception>
-        public static void QuickSort(int[] array, int leftBorder, int rightBorder)
+        public static void QuickSort<T>(T[] array, int leftBorder, int rightBorder, Comparison<T> comparison)
         {
+            CheckInputArray(array);
+
             if (leftBorder >= rightBorder)
             {
                 throw new ArgumentException($"{nameof(leftBorder)} can't be more or equal to the {nameof(rightBorder)}");
@@ -141,16 +164,16 @@
             int j = rightBorder;
 
             int separatorIndex = (leftBorder + rightBorder) / 2;
-            int separator = array[separatorIndex];
+            T separator = array[separatorIndex];
 
             do
             {
-                while (array[i] < separator)
+                while (comparison(array[i], separator) < 0)
                 {
                     i++;
                 }
 
-                while (array[j] > separator)
+                while (comparison(array[j], separator) > 0)
                 {
                     j--;
                 }
@@ -166,12 +189,12 @@
 
             if (i < rightBorder)
             {
-                QuickSort(array, i, rightBorder);
+                QuickSort(array, i, rightBorder, comparison);
             }
 
             if (j > leftBorder)
             {
-                QuickSort(array, leftBorder, j);
+                QuickSort(array, leftBorder, j, comparison);
             }
         }
 
@@ -180,13 +203,26 @@
         /// </summary>
         /// <param name="first">First element to be swapped.</param>
         /// <param name="second">Second element to be swapped.</param>
-        private static void Swap(ref int first, ref int second)
+        private static void Swap<T>(ref T first, ref T second)
         {
-            int temp;
+            T temp;
 
             temp = first;
             first = second;
             second = temp;
+        }
+
+        private static void CheckInputArray<T>(T[] array)
+        {
+            if (array == null)
+            {
+                throw new ArgumentNullException($"{nameof(array)} can't be equal to null.");
+            }
+
+            if (array.Length == 0)
+            {
+                throw new ArgumentNullException($"{nameof(array)} can't be empty.");
+            }
         }
     }
 }

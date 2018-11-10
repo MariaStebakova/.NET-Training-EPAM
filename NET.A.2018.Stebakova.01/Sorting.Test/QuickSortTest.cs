@@ -40,7 +40,7 @@ namespace Sorting.Test
         [TestMethod]
         public void QuickSort_WithNull()
         {
-            Assert.ThrowsException<ArgumentNullException>(() => Sorting.QuickSort(null));
+            Assert.ThrowsException<ArgumentNullException>(() => Sorting.QuickSort<int>(null));
         }
 
 
