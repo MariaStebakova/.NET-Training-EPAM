@@ -1,3 +1,4 @@
 # .NET-Training-EPAM
 
-1. Реализовать метод-генератор последовательности чисел Фибоначчи. Разработать unit-тесты.
+1. Реализовать метод-генератор последовательности чисел Фибоначчи. Разработать unit-тесты. Решение (https://github.com/MariaStebakova/.NET-Training-EPAM/tree/master/NET.A.2018.Stebakova.14/FibonacciLibrary)
+2. Реализовать обобщенный алгоритм бинарного поиска (добавить в проект с методами сортировки). Методы сортировки преобразовать в обобщенные. Разработать unit-тесты. Решение бинарного поиска (https://github.com/MariaStebakova/.NET-Training-EPAM/blob/master/NET.A.2018.Stebakova.01/Sorting/BinarySearchEngine.cs). Решение сортировок (https://github.com/MariaStebakova/.NET-Training-EPAM/blob/master/NET.A.2018.Stebakova.01/Sorting/Sorting.cs)
