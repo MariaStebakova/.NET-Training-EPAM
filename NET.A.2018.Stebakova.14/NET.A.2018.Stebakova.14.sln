@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibonacciLibrary", "Fibonac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibonacciLib.Test", "FibonacciLib.Test\FibonacciLib.Test.csproj", "{8C24D353-993F-489A-B74C-03D1317BE1D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterLib", "FilterLib\FilterLib.csproj", "{68BA1B31-B9F5-4890-80DE-976A82D5DEA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilterLib.Test", "FilterLib.Test\FilterLib.Test.csproj", "{EE798D7E-F5EE-4D31-819A-3DBC76768E5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{8C24D353-993F-489A-B74C-03D1317BE1D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C24D353-993F-489A-B74C-03D1317BE1D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C24D353-993F-489A-B74C-03D1317BE1D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68BA1B31-B9F5-4890-80DE-976A82D5DEA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68BA1B31-B9F5-4890-80DE-976A82D5DEA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68BA1B31-B9F5-4890-80DE-976A82D5DEA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68BA1B31-B9F5-4890-80DE-976A82D5DEA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE798D7E-F5EE-4D31-819A-3DBC76768E5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE798D7E-F5EE-4D31-819A-3DBC76768E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE798D7E-F5EE-4D31-819A-3DBC76768E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE798D7E-F5EE-4D31-819A-3DBC76768E5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
