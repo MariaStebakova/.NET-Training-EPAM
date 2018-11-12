@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ArrayTransform.ArrayTransformation
 {
-    public interface ITransformer
+    public interface ITransformer<in TInput, out TOutput>
     {
-        string Transform(double number);
+        TOutput Transform(TInput number);
     }
 }

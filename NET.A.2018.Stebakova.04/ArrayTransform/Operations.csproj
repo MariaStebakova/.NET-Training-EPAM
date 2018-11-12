@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayTransformation\ArrayTransform.cs" />
+    <Compile Include="ArrayTransformation\IPredicate.cs" />
     <Compile Include="ArrayTransformation\ITransformer.cs" />
     <Compile Include="ArrayTransformation\Transformers.cs" />
     <Compile Include="DoubleExtension.cs" />

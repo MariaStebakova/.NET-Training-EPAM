@@ -9,7 +9,7 @@ namespace ArrayTransform.ArrayTransformation
 {
     public class Transformers
     {
-        public class TransformerToWords : ITransformer
+        public class TransformerToWords : ITransformer<double, string>
         {
             public string Transform(double doubles)
             {
@@ -52,7 +52,7 @@ namespace ArrayTransform.ArrayTransformation
 
         }
 
-        public class TranformerToIEEE : ITransformer
+        public class TranformerToIEEE : ITransformer<double, string>
         {
             public string Transform(double number)
             {

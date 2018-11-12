@@ -1,10 +1,9 @@
-﻿using ArrayTransform.ArrayTransformation;
+﻿using System.Collections.Generic;
+using System;
+using ArrayTransform.ArrayTransformation;
 
 namespace Operations.ArrayTransformation
 {
-    using System;
-    using System.Text;
-
     /// <summary>
     /// Static class for transforming the double array into its verbal or binary representation.
     /// </summary>
@@ -15,7 +14,7 @@ namespace Operations.ArrayTransformation
         /// </summary>
         /// <param name="number">Double number.</param>
         /// <returns>Number in string representation.</returns>
-        public delegate string Transformer(double number);
+        public delegate TResult Transformer<in TSource, out TResult>(TSource number);
 
         /// <summary>
         /// Public method for transforming the double array somehow.
@@ -25,25 +24,9 @@ namespace Operations.ArrayTransformation
         /// <returns>Array of strings.</returns>
         /// <exception cref="ArgumentNullException">Is thrown if the <param name="array"/> is equal to null.</exception>
         /// <exception cref="ArgumentException">Is thrown if the <param name="array"/> is empty.</exception>
-        public static string[] Transform(double[] array, ITransformer transformer)
+        public static IEnumerable<TResult> Transform<TSource, TResult>(IEnumerable<TSource> array, ITransformer<TSource, TResult> transformer)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException($"{nameof(array)} can't be equal to null");
-            }
-
-            if (array.Length == 0)
-            {
-                throw new ArgumentException($"{nameof(array)} can't be empty");
-            }
-
-            string[] resWordArray = new string[array.Length];
-            for (int i = 0; i < array.Length; i++)
-            {
-                resWordArray[i] += transformer.Transform(array[i]);
-            }
-
-            return resWordArray;
+           return Transform<TSource, TResult>(array, transformer.Transform);
         }
 
         /// <summary>
@@ -54,21 +37,65 @@ namespace Operations.ArrayTransformation
         /// <returns>Array of strings.</returns>
         /// <exception cref="ArgumentNullException">Is thrown if the <param name="array"/> is equal to null.</exception>
         /// <exception cref="ArgumentException">Is thrown if the <param name="array"/> is empty.</exception>
-        public static string[] Transform(double[] array, Transformer transformer)
+        public static IEnumerable<TResult> Transform<TSource, TResult>(IEnumerable<TSource> array, Transformer<TSource, TResult> transformer)
         {
-           return Transform(array, new TransformerAdapter(transformer));
+            if (array == null)
+            {
+                throw new ArgumentNullException($"{nameof(array)} can't be equal to null");
+            }
+            
+            foreach (var a in array)
+            {
+                yield return transformer(a);
+            }
         }
 
-        private class TransformerAdapter : ITransformer
+        /// <summary>
+        /// Static method for filtering the input values
+        /// </summary>
+        /// <typeparam name="TSource">Type of input and output values</typeparam>
+        /// <param name="source">Values to filter</param>
+        /// <param name="predicate">Class for filtering</param>
+        /// <returns>Filtered values</returns>
+        public static IEnumerable<TSource> Filter<TSource>(this IEnumerable<TSource> source, IPredicate<TSource> predicate)
         {
-            private readonly Transformer _transformer;
+            return source.Filter(predicate.IsMatch);
+        }
 
-            public TransformerAdapter(Transformer transformer)
+
+        /// <summary>
+        /// Static method for filtering the input values
+        /// </summary>
+        /// <typeparam name="TSource">Type of input and output values</typeparam>
+        /// <param name="source">Values to filter</param>
+        /// <param name="predicate">Method of filtering</param>
+        /// <returns>Filtered values</returns>
+        public static IEnumerable<TSource> Filter<TSource>(this IEnumerable<TSource> source, Predicate<TSource> predicate)
+        {
+            if (source == null)
             {
-                _transformer = transformer;
+                throw new ArgumentNullException($"{nameof(source)} can't be equal to null!");
             }
 
-            public string Transform(double number) => _transformer(number);
+            if (predicate == null)
+            {
+                throw new ArgumentNullException($"{nameof(predicate)} can't be equal to null!");
+            }
+
+            return source.FilterInner(predicate);
+        }
+
+        private static IEnumerable<TSource> FilterInner<TSource>(this IEnumerable<TSource> source, Predicate<TSource> predicate)
+        {
+            List<TSource> result = new List<TSource>();
+
+            foreach (var s in source)
+            {
+                if (predicate(s))
+                    result.Add(s);
+            }
+
+            return result.ToArray();
         }
     }
 }

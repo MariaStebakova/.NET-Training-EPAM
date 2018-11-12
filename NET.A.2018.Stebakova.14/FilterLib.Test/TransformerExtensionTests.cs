@@ -24,7 +24,7 @@ namespace FilterLib.Test
             return TransformerExtension.Filter(numbers, predicate.IsMatch);
         }
 
-        [TestCase(new string[] { "test", "test1", "tes1", "test2", "test3" }, 
+        /*[TestCase(new string[] { "test", "test1", "tes1", "test2", "test3" }, 
             ExpectedResult = new string[] { "test1", "test2", "test3" })]
         public string[] FilterTest_StringHasFiveCharsPredicate(string[] strings)
         {
@@ -38,6 +38,6 @@ namespace FilterLib.Test
         {
             StringPredicate.StringStartsWithMPredicate predicate = new StringPredicate.StringStartsWithMPredicate();
             return TransformerExtension.Filter(strings, predicate.IsMatch);
-        }
+        }*/
     }
 }
