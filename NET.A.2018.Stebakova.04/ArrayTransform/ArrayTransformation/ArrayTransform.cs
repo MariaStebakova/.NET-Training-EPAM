@@ -43,11 +43,16 @@ namespace Operations.ArrayTransformation
             {
                 throw new ArgumentNullException($"{nameof(array)} can't be equal to null");
             }
-            
-            foreach (var a in array)
+
+            return TransformCore();
+
+            IEnumerable<TResult> TransformCore()
             {
-                yield return transformer(a);
-            }
+                foreach (var a in array)
+                {
+                    yield return transformer(a);
+                }
+            }  
         }
 
         /// <summary>

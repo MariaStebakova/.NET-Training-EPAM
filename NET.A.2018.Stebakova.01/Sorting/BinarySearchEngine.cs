@@ -10,44 +10,89 @@ namespace Sorting
     /// Class that provides functionality for binary search
     /// </summary>
     /// <typeparam name="T">Expected type</typeparam>
-    public class BinarySearchEngine<T>
+    public class BinarySearchEngine
     {
         /// <summary>
-        /// Method that returns position of <paramref name="element"/> in <paramref name="array"/> if such is exist.
+        /// Method that returns position of <paramref name="value"/> in <paramref name="array"/> if such is exist.
         /// </summary>
+        /// <typeparam name="T">Type of input data</typeparam>
         /// <param name="array">Needed array.</param>
         /// <param name="value">Needed value to search for.</param>
-        /// <exception cref="ArgumentNullException">Throws if <paramref name="array"/> or <paramref name="element"/> is equal to null. </exception>
+        /// <exception cref="ArgumentNullException">Throws if <paramref name="array"/> or <paramref name="value"/> is equal to null. </exception>
         /// <returns>Position of <paramref name="value"/> in <paramref name="array"/> if such is exist</returns>
-        public static int? BinarySearch(T[] array, T value)
+        public static int? BinarySearch<T>(T[] array, T value)
         {
             CheckInputArray(array, value);
 
-            return Search(array, value, null);
+            return Search(array, value, 0, array.Length, null);
         }
 
         /// <summary>
         /// Method that returns position of <paramref name="value"/> in <paramref name="array"/> if such is exist based on <paramref name="comparer"/>
         /// </summary>
+        /// <typeparam name="T">Type of input data</typeparam>
         /// <param name="array">Needed array</param>
         /// <param name="value">Needed value to search for</param>
         /// <param name="comparer"><see cref="IComparer{T}"/> comparer</param>
-        /// <exception cref="ArgumentNullException">Throws if <paramref name="array"/> or <paramref name="element"/> is equal to null. </exception>
+        /// <exception cref="ArgumentNullException">Throws if <paramref name="array"/> or <paramref name="value"/> is equal to null. </exception>
         /// <returns>Position of <paramref name="value"/> in <paramref name="array"/> if such is exist based on <paramref name="comparer"/></returns>
-        public static int? BinarySearch(T[] array, T value, IComparer<T> comparer)
+        public static int? BinarySearch<T>(T[] array, T value, IComparer<T> comparer)
         {
             CheckInputArray(array, value);
 
-            return Search(array, value, comparer.Compare);
+            return Search(array, value, 0, array.Length, comparer.Compare);
         }
 
-        private static int? Search(T[] array, T value, Comparison<T> comparison)
+        /// <summary>
+        /// Method that returns position of <paramref name="value"/> in <paramref name="array"/> if such is exist based on <paramref name="comparison"/>
+        /// </summary>
+        /// <typeparam name="T">Type of input data</typeparam>
+        /// <param name="array">Needed array</param>
+        /// <param name="value">Needed value to search for</param>
+        /// <param name="comparison"><see cref="Comparison{T}"/> comparer</param>
+        /// <exception cref="ArgumentNullException">Throws if <paramref name="array"/> or <paramref name="value"/> is equal to null. </exception>
+        /// <returns>Position of <paramref name="value"/> in <paramref name="array"/> if such is exist based on <paramref name="comparison"/></returns>
+        public static int? BinarySearch<T>(T[] array, T value, Comparison<T> comparison)
+        {
+            CheckInputArray(array, value);
+
+            return Search(array, value, 0, array.Length, comparison);
+        }
+
+        /// <summary>
+        /// Method that returns position of <paramref name="value"/> in <paramref name="array"/> if such is exist based on <paramref name="comparer"/>
+        /// </summary>
+        /// <typeparam name="T">Type of input data</typeparam>
+        /// <param name="array">Needed array</param>
+        /// <param name="value">Needed value to search for</param>
+        /// <param name="startIndex">Beginning of starting searching</param>
+        /// <param name="count">Number of elements of the array for searching in</param>
+        /// <param name="comparer"><see cref="IComparer{T}"/> comparer</param>
+        /// <returns>Position of <paramref name="value"/> in <paramref name="array"/> if such is exist based on <paramref name="comparer"/></returns>
+        public static int? BinarySearch<T>(T[] array, T value, int startIndex, int count, IComparer<T> comparer)
+        {
+            CheckInputArray(array, value);
+
+            return Search(array, value, 0, array.Length, comparer.Compare);
+        }
+
+        /// <summary>
+        /// Method that returns position of <paramref name="value"/> in <paramref name="array"/> if such is exist based on <paramref name="comparison"/>
+        /// </summary>
+        /// <typeparam name="T">Type of input data</typeparam>
+        /// <param name="array">Needed array</param>
+        /// <param name="value">Needed value to search for</param>
+        /// <param name="startIndex">Beginning of starting searching</param>
+        /// <param name="count">Number of elements of the array for searching in</param>
+        /// <param name="comparison"><see cref="Comparison{T}"/> comparer</param>
+        /// <returns>Position of <paramref name="value"/> in <paramref name="array"/> if such is exist based on <paramref name="comparison"/></returns>
+        public static int? Search<T>(T[] array, T value, int startIndex, int count, Comparison<T> comparison)
         {
             if (comparison == null)
                 comparison = Comparer<T>.Default.Compare;
 
-            int leftIndex = 0;
-            int rightIndex = array.Length - 1;
+            int leftIndex = startIndex;
+            int rightIndex = startIndex + count - 1;
             int middleIndex;
 
             while (leftIndex <= rightIndex)
@@ -72,7 +117,7 @@ namespace Sorting
             return null;
         }
 
-        private static void CheckInputArray(T[] array, T value)
+        private static void CheckInputArray<T>(T[] array, T value)
         {
             if (array == null || array.Length == 0)
                 throw new ArgumentNullException($"{nameof(array)} can't be equal to null or empty");
