@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 
 namespace StreamsDemo
@@ -54,7 +55,7 @@ namespace StreamsDemo
             string sourceData;
 
             // TODO: step 1. Use StreamReader to read entire file in string
-            using (StreamReader streamReader = new StreamReader(sourcePath))
+            using (StreamReader streamReader = new StreamReader(sourcePath, Encoding.UTF8))
             {
                 sourceData = streamReader.ReadToEnd();
             }
@@ -63,19 +64,20 @@ namespace StreamsDemo
             byte[] sourceBytes = Encoding.UTF8.GetBytes(sourceData);
 
             // TODO: step 3. Use MemoryStream instance to read from byte array (from step 2)
-            MemoryStream memStream = new MemoryStream();
             int srcBytesLen = sourceBytes.Length;
-            memStream.Read(sourceBytes, 0, srcBytesLen);
+            MemoryStream memStream = new MemoryStream(sourceBytes);
+            memStream.Write(sourceBytes, 0, srcBytesLen);
+            memStream.Position = 0;
 
             // TODO: step 4. Use MemoryStream instance (from step 3) to write it content in new byte array
             byte[] destinationBytes = new byte[srcBytesLen];
-            memStream.Write(destinationBytes, 0, srcBytesLen);
+            memStream.Read(destinationBytes, 0, srcBytesLen);
 
             // TODO: step 5. Use Encoding class instance (from step 2) to create char array on byte array content
             char[] charArray = Encoding.UTF8.GetChars(destinationBytes);
 
             // TODO: step 6. Use StreamWriter here to write char array content in new file
-            using (StreamWriter streamWriter = new StreamWriter(destinationPath))
+            using (StreamWriter streamWriter = new StreamWriter(File.Create(destinationPath), Encoding.UTF8))
             {
                 for (int i = 0; i < charArray.Length; i++)
                 {
@@ -189,10 +191,15 @@ namespace StreamsDemo
             using (TextReader sourceTextReader = new StreamReader(sourceStream))
             using (TextWriter destTextWriter = new StreamWriter(destinationPath))
             {
-
+                
                 buffer = sourceTextReader.ReadLine();
-                destTextWriter.WriteLine(buffer);
-                lineCount++;
+                while (buffer != null)
+                {
+                    destTextWriter.WriteLine(buffer);
+                    lineCount++;
+                    buffer = sourceTextReader.ReadLine();
+                }
+                
             }
 
             return lineCount;
